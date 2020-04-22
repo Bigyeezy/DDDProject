@@ -15,8 +15,8 @@ public class Creneau {
     private final List<String> DAYS_AUTORIZED = Arrays.asList("Saturday", "Friday");
 
     public Creneau(final LocalDateTime heureDebut, final Long duree) throws ExceptionManager {
-        if (!heureFin.isAfter(heureDebut)) {
-            throw new ExceptionManager("La date de fin doit être après la date de but");
+        if (heureDebut == null || duree == null) {
+            throw new ExceptionManager("La date et la durée sont obligatoires");
         }
         if (duree < 0) {
             throw new ExceptionManager("La durée ne peut pas être négatif");
