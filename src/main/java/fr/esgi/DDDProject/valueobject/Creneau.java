@@ -1,4 +1,5 @@
-package com.esgi.valueobject;
+package fr.esgi.DDDProject.valueobject;
+
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -27,11 +28,11 @@ public class Creneau {
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Creneau creneau = (Creneau) o;
+        final Creneau creneau = (Creneau) o;
 
         if (date != null ? !date.equals(creneau.date) : creneau.date != null) return false;
         if (heureDebut != null ? !heureDebut.equals(creneau.heureDebut) : creneau.heureDebut != null) return false;
