@@ -1,9 +1,8 @@
 package fr.esgi.DDDProject;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import fr.esgi.DDDProject.valueobject.Creneau;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import fr.esgi.DDDProject.valueobject.exception.ExceptionManager;
+
 import org.junit.Test;
 
 import java.time.LocalDateTime;

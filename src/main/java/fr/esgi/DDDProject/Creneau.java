@@ -1,7 +1,5 @@
-package fr.esgi.DDDProject.valueobject;
+package fr.esgi.DDDProject;
 
-
-import fr.esgi.DDDProject.valueobject.exception.ExceptionManager;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

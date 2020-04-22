@@ -1,11 +1,9 @@
-package fr.esgi.DDDProject.entity;
-
-import fr.esgi.DDDProject.valueobject.Creneau;
+package fr.esgi.DDDProject;
 
 import java.util.Objects;
 
 public class Entretien {
-    final Integer entretienId;
+    private final Integer entretienId;
     private String statut;
     private Creneau creneau;
     private String recruteur;
@@ -20,6 +18,14 @@ public class Entretien {
         this.candidat = candidat;
     }
 
+    public void  confirmer(){
+
+       // return false;
+    }
+
+    public void annuler(String raison){
+        //
+    }
 
 
 
@@ -31,44 +37,26 @@ public class Entretien {
         return statut;
     }
 
-    public void setStatut(String statut) {
-        this.statut = statut;
-    }
-
-    public Creneau getCreneau() {
+     public Creneau getCreneau() {
         return creneau;
-    }
-
-    public void setCreneau(Creneau creneau) {
-        this.creneau = creneau;
     }
 
     public String getRecruteur() {
         return recruteur;
     }
 
-    public void setRecruteur(String recruteur) {
-        this.recruteur = recruteur;
-    }
-
     public String getCandidat() {
         return candidat;
     }
 
-    public void setCandidat(String candidat) {
-        this.candidat = candidat;
-    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Entretien entretien = (Entretien) o;
-        return Objects.equals(entretienId, entretien.entretienId) &&
-                Objects.equals(statut, entretien.statut) &&
-                Objects.equals(creneau, entretien.creneau) &&
-                Objects.equals(recruteur, entretien.recruteur) &&
-                Objects.equals(candidat, entretien.candidat);
+        return Objects.equals(entretienId, entretien.entretienId);
+
     }
 
     @Override

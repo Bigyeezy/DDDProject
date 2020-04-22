@@ -1,4 +1,4 @@
-package fr.esgi.DDDProject.valueobject.exception;
+package fr.esgi.DDDProject;
 
 public class ExceptionManager extends Exception {
 
