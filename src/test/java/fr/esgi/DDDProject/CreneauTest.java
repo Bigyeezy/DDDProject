@@ -26,7 +26,7 @@ public class CreneauTest {
 
         // Then
         assertThatThrownBy(() -> new Creneau(null, 5L))
-                .isInstanceOf(NullPointerException.class);
+                .isInstanceOf(ExceptionManager.class);
     }
 
 }
