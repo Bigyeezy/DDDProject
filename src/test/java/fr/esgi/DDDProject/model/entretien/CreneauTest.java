@@ -1,4 +1,4 @@
-package fr.esgi.DDDProject;
+package fr.esgi.DDDProject.model.entretien;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
