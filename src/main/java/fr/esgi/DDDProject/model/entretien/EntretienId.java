@@ -1,4 +1,6 @@
-package fr.esgi.DDDProject;
+package fr.esgi.DDDProject.model.entretien;
+
+import fr.esgi.DDDProject.model.ValueObject;
 
 import java.util.Objects;
 import java.util.UUID;
@@ -8,7 +10,7 @@ public class EntretienId extends ValueObject {
     private final UUID id;
 
     public EntretienId(){
-        this.id = UUID.randomUUID();
+        this.id = this.genererUUID();
     }
 
     public UUID getId() {

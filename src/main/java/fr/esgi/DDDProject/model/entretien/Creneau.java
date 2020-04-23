@@ -1,5 +1,7 @@
-package fr.esgi.DDDProject;
+package fr.esgi.DDDProject.model.entretien;
 
+
+import fr.esgi.DDDProject.infrastructure.ExceptionManager;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

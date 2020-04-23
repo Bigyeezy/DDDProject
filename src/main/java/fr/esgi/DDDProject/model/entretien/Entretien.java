@@ -1,4 +1,4 @@
-package fr.esgi.DDDProject;
+package fr.esgi.DDDProject.model.entretien;
 
 import java.util.Objects;
 

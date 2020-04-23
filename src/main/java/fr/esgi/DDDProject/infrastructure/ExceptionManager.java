@@ -1,4 +1,4 @@
-package fr.esgi.DDDProject;
+package fr.esgi.DDDProject.infrastructure;
 
 public class ExceptionManager extends Exception {
 

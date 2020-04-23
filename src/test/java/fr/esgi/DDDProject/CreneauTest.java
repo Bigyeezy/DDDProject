@@ -3,6 +3,8 @@ package fr.esgi.DDDProject;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import fr.esgi.DDDProject.infrastructure.ExceptionManager;
+import fr.esgi.DDDProject.model.entretien.Creneau;
 import org.junit.Test;
 
 import java.time.LocalDateTime;
