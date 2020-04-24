@@ -10,19 +10,8 @@ import java.time.LocalDateTime;
 public class PlanifierEntretien {
 
     Entretien entretien;
-    Salle salle;
 
-    public void planifierUnEntretien(Candidat candidat, Recruteur recruteur, LocalDateTime date) {
-        if (candidat.getNombreAnneeExperience() >= recruteur.getNombreAnneeExperience())
-            return;
-
-        if (entretien.getCreneau().getHeureDebut().getHour() < 18 || entretien.getCreneau().getHeureFin().getHour() > 21) {
-            return;
-        }
-
-        if (entretien.getCreneau().getDuree() > 3) {
-            return;
-        }
+    public void planifierUnEntretien(Candidat candidat, Recruteur recruteur, LocalDateTime date, Salle salle) {
 
         if (recruteur.getDisponibilites().get(date) != null && salle.getDisponibilites().get(date) != null &&
                 !recruteur.getDisponibilites().get(date) && !salle.getDisponibilites().get(date)) {

@@ -1,5 +1,6 @@
 package fr.esgi.DDDProject.model.entretien;
 
+import fr.esgi.DDDProject.infrastructure.ExceptionManager;
 import fr.esgi.DDDProject.model.candidat.Candidat;
 import fr.esgi.DDDProject.model.recruteur.Recruteur;
 import fr.esgi.DDDProject.model.salle.SalleId;
@@ -14,11 +15,16 @@ public class Entretien {
     private Recruteur recruteur;
     private Candidat candidat;
 
-    public Entretien(Creneau creneau, Recruteur recruteur, Candidat candidat, SalleId salleId) {
+    public Entretien(Creneau creneau, Recruteur recruteur, Candidat candidat, SalleId salleId) throws ExceptionManager {
         this.entretienId = new EntretienId();
         this.salleId = salleId;
         this.statut = StatutEntretienEnum.EN_ATTENTE;
         this.creneau = creneau;
+
+        if (candidat.getNombreAnneeExperience() >= recruteur.getNombreAnneeExperience()) {
+            throw new ExceptionManager("Le nombre d'année d'expérience du recruteur doit être supérieur au candidat.");
+        }
+
         this.recruteur = recruteur;
         this.candidat = candidat;
     }

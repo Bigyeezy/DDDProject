@@ -31,8 +31,11 @@ public class Creneau {
         this.date = LocalDate.now();
         this.heureDebut = heureDebut;
         this.duree = duree;
-
         this.heureFin = heureDebut.plusHours(duree);
+
+        if (heureDebut.getHour() < 18 || this.heureFin.getHour() > 21) {
+            throw new ExceptionManager("Le créneau doit être entre 18h et 21h.");
+        }
     }
 
     public LocalDate getDate() {
