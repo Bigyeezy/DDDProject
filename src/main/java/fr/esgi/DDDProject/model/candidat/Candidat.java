@@ -1,6 +1,6 @@
 package fr.esgi.DDDProject.model.candidat;
 
-import fr.esgi.DDDProject.infrastructure.ExceptionManager;
+import fr.esgi.DDDProject.infrastructure.candidat.InvalideNomreAnneeExperienceException;
 
 import java.util.List;
 import java.util.Objects;
@@ -14,13 +14,14 @@ public class Candidat {
     private final Integer nombreAnneeExperience;
     private final List<String> typeProfil;
 
-    public Candidat(String nom, String prenom, String email, String CV, Integer nombreAnneeExperience, List<String> typeProfil) throws ExceptionManager {
+    public Candidat(String nom, String prenom, String email, String CV, Integer nombreAnneeExperience, List<String> typeProfil) throws InvalideNomreAnneeExperienceException {
         this.nom = nom;
         this.prenom = prenom;
         this.email = email;
         this.CV = CV;
+
         if(nombreAnneeExperience < 0 ) {
-            throw new ExceptionManager("Votre nombre d'année d'expérience n'est pas valide");
+            throw new InvalideNomreAnneeExperienceException("Votre nombre d'année d'expérience n'est pas valide");
         }
         this.nombreAnneeExperience = nombreAnneeExperience;
         this.typeProfil = typeProfil;

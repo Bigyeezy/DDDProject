@@ -1,5 +1,8 @@
 package fr.esgi.DDDProject.infrastructure;
 
+import fr.esgi.DDDProject.infrastructure.salle.EtageNegatifException;
+import fr.esgi.DDDProject.infrastructure.salle.SalleExisteDejaException;
+import fr.esgi.DDDProject.infrastructure.salle.SalleNExistePasException;
 import fr.esgi.DDDProject.model.salle.Salle;
 import fr.esgi.DDDProject.model.salle.SalleId;
 import fr.esgi.DDDProject.model.salle.Salles;
@@ -13,7 +16,7 @@ public class FauxSalleBD implements Salles {
     List<Salle> salles = new ArrayList<>();
 
     @Override
-    public List<Salle> getAll() {
+    public List<Salle> getAll() throws EtageNegatifException {
         List<LocalDate> disponibilites = new ArrayList<>();
         disponibilites.add(LocalDate.of(2020, 4, 23));
         disponibilites.add(LocalDate.of(2020, 4, 24));
@@ -32,9 +35,9 @@ public class FauxSalleBD implements Salles {
     }
 
     @Override
-    public Salle save(Salle salle) throws ExceptionManager {
+    public Salle save(Salle salle) throws SalleExisteDejaException {
         if (salles.contains(salle)) {
-            throw new ExceptionManager("Une salle existe déjà.");
+            throw new SalleExisteDejaException("Une salle existe déjà.");
         }
         salles.add(salle);
 
@@ -42,11 +45,11 @@ public class FauxSalleBD implements Salles {
     }
 
     @Override
-    public Salle update(Salle salle) throws ExceptionManager {
+    public Salle update(Salle salle) throws SalleNExistePasException {
         final int index = salles.indexOf(salle);
 
         if (index == -1) {
-            throw new ExceptionManager("Cette salle n'existe pas.");
+            throw new SalleNExistePasException("Cette salle n'existe pas.");
         }
         salles.set(index, salle);
 

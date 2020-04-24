@@ -1,5 +1,8 @@
 package fr.esgi.DDDProject.model.salle;
 
+import fr.esgi.DDDProject.infrastructure.candidat.InvalideNomreAnneeExperienceException;
+import fr.esgi.DDDProject.infrastructure.salle.EtageNegatifException;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -14,12 +17,24 @@ public class Salle {
     private Integer capacite;
     private List<LocalDate> disponibilites;
 
-    public Salle(String nom, Integer etage, Integer capacite, List<LocalDate> disponibilites) {
+    public Salle(String nom, Integer etage, Integer capacite, List<LocalDate> disponibilites) throws EtageNegatifException {
         this.salleId = new SalleId();
         this.nom = nom;
+
+        if(etage < 0 ) {
+            throw new EtageNegatifException("Le numéro de l'étage n'est pas valide");
+        }
+
         this.etage = etage;
+
+
+        if(capacite < 0 ) {
+            throw new EtageNegatifException("La capacité de la salle n'est pas valide");
+        }
+
         this.capacite = capacite;
         this.disponibilites = disponibilites;
+
     }
 
     public boolean reserver(LocalDateTime date) {

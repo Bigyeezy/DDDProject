@@ -1,5 +1,8 @@
 package fr.esgi.DDDProject.infrastructure;
 
+import fr.esgi.DDDProject.infrastructure.candidat.InvalideNomreAnneeExperienceException;
+import fr.esgi.DDDProject.infrastructure.recruteur.RecretueurExisteDejaException;
+import fr.esgi.DDDProject.infrastructure.recruteur.RecruteurNExistePas;
 import fr.esgi.DDDProject.model.recruteur.Recruteur;
 import fr.esgi.DDDProject.model.recruteur.RecruteurId;
 import fr.esgi.DDDProject.model.recruteur.Recruteurs;
@@ -13,7 +16,7 @@ public class FauxRecruteurBD implements Recruteurs {
     List<Recruteur> recruteurs = new ArrayList<>();
 
     @Override
-    public List<Recruteur> getAll() throws ExceptionManager {
+    public List<Recruteur> getAll() throws InvalideNomreAnneeExperienceException {
         List<LocalDate> disponibilites = new ArrayList<>();
         disponibilites.add(LocalDate.of(2020, 4, 23));
         disponibilites.add(LocalDate.of(2020, 4, 24));
@@ -31,9 +34,9 @@ public class FauxRecruteurBD implements Recruteurs {
     }
 
     @Override
-    public Recruteur save(Recruteur recruteur) throws ExceptionManager {
+    public Recruteur save(Recruteur recruteur) throws RecretueurExisteDejaException {
         if (recruteurs.contains(recruteur)) {
-            throw new ExceptionManager("Un recruteur existe déjà.");
+            throw new RecretueurExisteDejaException("Un recruteur existe déjà.");
         }
         recruteurs.add(recruteur);
 
@@ -41,11 +44,11 @@ public class FauxRecruteurBD implements Recruteurs {
     }
 
     @Override
-    public Recruteur update(Recruteur recruteur) throws ExceptionManager {
+    public Recruteur update(Recruteur recruteur) throws RecruteurNExistePas {
         final int index = recruteurs.indexOf(recruteur);
 
         if (index == -1) {
-            throw new ExceptionManager("Ce recruteur n'existe pas.");
+            throw new RecruteurNExistePas("Ce recruteur n'existe pas.");
         }
         recruteurs.set(index, recruteur);
 

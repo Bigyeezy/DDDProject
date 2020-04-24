@@ -1,6 +1,8 @@
 package fr.esgi.DDDProject.use_case.entretien;
 
-import fr.esgi.DDDProject.infrastructure.ExceptionManager;
+import fr.esgi.DDDProject.infrastructure.entretien.ExtretienNExistePas;
+import fr.esgi.DDDProject.infrastructure.recruteur.RecruteurNExistePas;
+import fr.esgi.DDDProject.infrastructure.salle.SalleNExistePasException;
 import fr.esgi.DDDProject.model.entretien.Entretien;
 import fr.esgi.DDDProject.model.entretien.Entretiens;
 import fr.esgi.DDDProject.model.recruteur.Recruteur;
@@ -14,13 +16,13 @@ public class AnnulerEntretien {
     Salles fauxSalleBD;
     Recruteurs fauxRecruteursBD;
 
-    public AnnulerEntretien(Entretiens fauxEntretienBD, Salles fauxSalleBD, Recruteurs fauxRecruteursBD) throws ExceptionManager {
+    public AnnulerEntretien(Entretiens fauxEntretienBD, Salles fauxSalleBD, Recruteurs fauxRecruteursBD) {
         this.fauxEntretienBD = fauxEntretienBD;
         this.fauxSalleBD = fauxSalleBD;
         this.fauxRecruteursBD = fauxRecruteursBD;
     }
 
-    public Entretien annulerEntretien(Entretien entretien, String raison) throws ExceptionManager {
+    public Entretien annulerEntretien(Entretien entretien, String raison) throws ExtretienNExistePas, SalleNExistePasException, RecruteurNExistePas {
         entretien.annuler(raison);
         fauxEntretienBD.update(entretien);
 

@@ -1,7 +1,7 @@
 package fr.esgi.DDDProject.model.entretien;
 
 
-import fr.esgi.DDDProject.infrastructure.ExceptionManager;
+import fr.esgi.DDDProject.infrastructure.entretien.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -14,19 +14,19 @@ public class Creneau {
     private final Integer duree;
     private final List<String> DAYS_AUTORIZED = Arrays.asList("SATURDAY", "FRIDAY");
 
-    public Creneau(final LocalDateTime heureDebut, final Integer duree) throws ExceptionManager {
+    public Creneau(final LocalDateTime heureDebut, final Integer duree) throws DateEnWeekendException, HeureEntretientHorsCrenauException, DureeNegativeException, DureeMaximaleDepasseException, ParametreNullException {
         if (heureDebut == null || duree == null) {
-            throw new ExceptionManager("La date et la durée sont obligatoires");
+            throw new ParametreNullException("La date et la durée sont obligatoires");
         }
         if (duree <= 0) {
-            throw new ExceptionManager("La durée ne peut pas être négative");
+            throw new DureeNegativeException("La durée ne peut pas être négative");
         }
         if (duree > 3) {
-            throw new ExceptionManager("La durée ne peut pas être supérieur 3 heures.");
+            throw new DureeMaximaleDepasseException("La durée ne peut pas être supérieur 3 heures.");
         }
         final String name = heureDebut.getDayOfWeek().name().toUpperCase();
         if (DAYS_AUTORIZED.contains(name)) {
-            throw new ExceptionManager("La date doit être dans la semaine");
+            throw new DateEnWeekendException("La date doit être dans la semaine");
         }
         this.date = LocalDate.now();
         this.heureDebut = heureDebut;
@@ -34,7 +34,7 @@ public class Creneau {
         this.heureFin = heureDebut.plusHours(duree);
 
         if (heureDebut.getHour() < 18 || this.heureFin.getHour() > 21) {
-            throw new ExceptionManager("Le créneau doit être entre 18h et 21h.");
+            throw new HeureEntretientHorsCrenauException("Le créneau doit être entre 18h et 21h.");
         }
     }
 

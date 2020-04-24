@@ -1,5 +1,7 @@
 package fr.esgi.DDDProject.infrastructure;
 
+import fr.esgi.DDDProject.infrastructure.candidat.InvalideNomreAnneeExperienceException;
+import fr.esgi.DDDProject.infrastructure.entretien.*;
 import fr.esgi.DDDProject.model.candidat.Candidat;
 import fr.esgi.DDDProject.model.entretien.Creneau;
 import fr.esgi.DDDProject.model.entretien.Entretien;
@@ -18,7 +20,7 @@ public class FauxEntretienBD implements Entretiens {
     List<Entretien> entretiens = new ArrayList<>();
 
     @Override
-    public List<Entretien> getAll() throws ExceptionManager {
+    public List<Entretien> getAll() throws DureeNegativeException, HeureEntretientHorsCrenauException, DureeMaximaleDepasseException, ParametreNullException, DateEnWeekendException, InvalideNomreAnneeExperienceException, CreneauException, ExperienceCandidatSuperieurRecruteurException {
         Creneau creneau = new Creneau( LocalDateTime.of(2020, Month.JANUARY,6,18,00), 1);
         List<LocalDate> dispo = new ArrayList<>();
 
@@ -39,9 +41,9 @@ public class FauxEntretienBD implements Entretiens {
     }
 
     @Override
-    public Entretien save(final Entretien entretien) throws ExceptionManager {
+    public Entretien save(final Entretien entretien) throws EntretienExisteDejaExecption {
         if (entretiens.contains(entretien)) {
-            throw new ExceptionManager("Un entretien existe déjà.");
+            throw new EntretienExisteDejaExecption("Un entretien existe déjà.");
         }
         entretiens.add(entretien);
 
@@ -49,11 +51,11 @@ public class FauxEntretienBD implements Entretiens {
     }
 
     @Override
-    public Entretien update(final Entretien entretien) throws ExceptionManager {
+    public Entretien update(final Entretien entretien) throws ExtretienNExistePas {
         final int index = entretiens.indexOf(entretien);
 
         if (index == -1) {
-            throw new ExceptionManager("Cet entretien n'existe pas.");
+            throw new ExtretienNExistePas("Cet entretien n'existe pas.");
         }
         entretiens.set(index, entretien);
 

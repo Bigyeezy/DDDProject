@@ -1,14 +1,14 @@
 package fr.esgi.DDDProject.model.entretien;
 
-import fr.esgi.DDDProject.infrastructure.ExceptionManager;
 import fr.esgi.DDDProject.infrastructure.FauxSalleBD;
+import fr.esgi.DDDProject.infrastructure.entretien.CreneauException;
+import fr.esgi.DDDProject.infrastructure.entretien.ExperienceCandidatSuperieurRecruteurException;
 import fr.esgi.DDDProject.model.candidat.Candidat;
 import fr.esgi.DDDProject.model.recruteur.Recruteur;
 import fr.esgi.DDDProject.model.salle.Salle;
 import fr.esgi.DDDProject.model.salle.SalleId;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class Entretien {
@@ -19,21 +19,21 @@ public class Entretien {
     private Recruteur recruteur;
     private Candidat candidat;
 
-    public Entretien(Creneau creneau, Recruteur recruteur, Candidat candidat, SalleId salleId) throws ExceptionManager {
+    public Entretien(Creneau creneau, Recruteur recruteur, Candidat candidat, SalleId salleId) throws ExperienceCandidatSuperieurRecruteurException, CreneauException {
         this.entretienId = new EntretienId();
         this.salleId = salleId;
         this.statut = StatutEntretienEnum.EN_ATTENTE;
         this.creneau = creneau;
 
         if (candidat.getNombreAnneeExperience() >= recruteur.getNombreAnneeExperience()) {
-            throw new ExceptionManager("Le nombre d'année d'expérience du recruteur doit être supérieur au candidat.");
+            throw new ExperienceCandidatSuperieurRecruteurException("Le nombre d'année d'expérience du recruteur doit être supérieur au candidat.");
         }
 
         this.recruteur = recruteur;
         this.candidat = candidat;
 
         if(!estPossible(creneau.getDate(), salleId)) {
-            throw new ExceptionManager("");
+            throw new CreneauException("La salle ou le recruteur n'est pas disponnible");
         }
     }
 

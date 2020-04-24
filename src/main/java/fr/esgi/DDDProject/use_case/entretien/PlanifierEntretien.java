@@ -1,6 +1,10 @@
 package fr.esgi.DDDProject.use_case.entretien;
 
-import fr.esgi.DDDProject.infrastructure.ExceptionManager;
+import fr.esgi.DDDProject.infrastructure.candidat.InvalideNomreAnneeExperienceException;
+import fr.esgi.DDDProject.infrastructure.entretien.*;
+import fr.esgi.DDDProject.infrastructure.recruteur.RecruteurNExistePas;
+import fr.esgi.DDDProject.infrastructure.salle.EtageNegatifException;
+import fr.esgi.DDDProject.infrastructure.salle.SalleNExistePasException;
 import fr.esgi.DDDProject.model.candidat.Candidat;
 import fr.esgi.DDDProject.model.entretien.Creneau;
 import fr.esgi.DDDProject.model.entretien.Entretien;
@@ -19,13 +23,13 @@ public class PlanifierEntretien {
     Salles fauxSalleBD;
     Recruteurs fauxRecruteurBD;
 
-    public PlanifierEntretien(Entretiens fauxEntretienBD, Salles fauxSalleBD, Recruteurs fauxRecruteurBD) throws ExceptionManager {
+    public PlanifierEntretien(Entretiens fauxEntretienBD, Salles fauxSalleBD, Recruteurs fauxRecruteurBD) {
         this.fauxEntretienBD = fauxEntretienBD;
         this.fauxSalleBD = fauxSalleBD;
         this.fauxRecruteurBD = fauxRecruteurBD;
     }
 
-    public Entretien planifierUnEntretien(Candidat candidat, LocalDateTime date, Integer duree) throws ExceptionManager {
+    public Entretien planifierUnEntretien(Candidat candidat, LocalDateTime date, Integer duree) throws DureeNegativeException, HeureEntretientHorsCrenauException, DureeMaximaleDepasseException, ParametreNullException, DateEnWeekendException, CreneauException, ExperienceCandidatSuperieurRecruteurException, InvalideNomreAnneeExperienceException, EtageNegatifException, SalleNExistePasException, RecruteurNExistePas, EntretienExisteDejaExecption {
         Creneau creneau = new Creneau(date, duree);
 
         List<Salle> salles = fauxSalleBD.getAll();

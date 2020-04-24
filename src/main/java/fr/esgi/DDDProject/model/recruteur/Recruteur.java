@@ -1,12 +1,10 @@
 package fr.esgi.DDDProject.model.recruteur;
 
-import fr.esgi.DDDProject.infrastructure.ExceptionManager;
+import fr.esgi.DDDProject.infrastructure.candidat.InvalideNomreAnneeExperienceException;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Map;
-import java.util.Objects;
 
 public class Recruteur extends RecruteurId {
 
@@ -17,13 +15,13 @@ public class Recruteur extends RecruteurId {
     private Integer nombreAnneeExperience;
     private List<LocalDate> disponibilites;
 
-    public Recruteur(String nom, String prenom, String email, Integer nombreAnneeExperience, List<LocalDate> disponibilites) throws ExceptionManager {
+    public Recruteur(String nom, String prenom, String email, Integer nombreAnneeExperience, List<LocalDate> disponibilites) throws InvalideNomreAnneeExperienceException {
         this.recruteurId = new RecruteurId();
         this.nom = nom;
         this.prenom = prenom;
         this.email = email;
         if(nombreAnneeExperience < 0 ) {
-            throw new ExceptionManager("Votre nombre d'année d'expérience n'est pas valide");
+            throw new InvalideNomreAnneeExperienceException("Votre nombre d'année d'expérience n'est pas valide");
         }
         this.nombreAnneeExperience = nombreAnneeExperience;
         this.disponibilites = disponibilites;
