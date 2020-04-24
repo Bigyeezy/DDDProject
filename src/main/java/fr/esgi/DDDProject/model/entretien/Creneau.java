@@ -11,15 +11,18 @@ public class Creneau {
     private final LocalDate date;
     private final LocalDateTime heureDebut;
     private LocalDateTime heureFin;
-
+    private final Integer duree;
     private final List<String> DAYS_AUTORIZED = Arrays.asList("Saturday", "Friday");
 
-    public Creneau(final LocalDateTime heureDebut, final Long duree) throws ExceptionManager {
+    public Creneau(final LocalDateTime heureDebut, final Integer duree) throws ExceptionManager {
         if (heureDebut == null || duree == null) {
             throw new ExceptionManager("La date et la durée sont obligatoires");
         }
-        if (duree < 0) {
+        if (duree <= 0) {
             throw new ExceptionManager("La durée ne peut pas être négatif");
+        }
+        if (duree > 3) {
+            throw new ExceptionManager("La durée ne peut pas être supérieur 3 heures.");
         }
         final String name = LocalDate.now().getDayOfWeek().name();
         if (DAYS_AUTORIZED.contains(name)) {
@@ -27,8 +30,9 @@ public class Creneau {
         }
         this.date = LocalDate.now();
         this.heureDebut = heureDebut;
+        this.duree = duree;
 
-        this.heureFin = heureDebut.plusMinutes(duree);
+        this.heureFin = heureDebut.plusHours(duree);
     }
 
     public LocalDate getDate() {
@@ -41,6 +45,10 @@ public class Creneau {
 
     public LocalDateTime getHeureFin() {
         return heureFin;
+    }
+
+    public Integer getDuree() {
+        return duree;
     }
 
     @Override
