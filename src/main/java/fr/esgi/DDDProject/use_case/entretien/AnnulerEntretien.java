@@ -12,17 +12,17 @@ import fr.esgi.DDDProject.model.salle.Salles;
 
 public class AnnulerEntretien {
 
-    Entretiens fauxEntretienBD;
-    Salles fauxSalleBD;
-    Recruteurs fauxRecruteursBD;
+    private final Entretiens fauxEntretienBD;
+    private final Salles fauxSalleBD;
+    private final Recruteurs fauxRecruteursBD;
 
-    public AnnulerEntretien(Entretiens fauxEntretienBD, Salles fauxSalleBD, Recruteurs fauxRecruteursBD) {
+    public AnnulerEntretien(final Entretiens fauxEntretienBD, final Salles fauxSalleBD, final Recruteurs fauxRecruteursBD) {
         this.fauxEntretienBD = fauxEntretienBD;
         this.fauxSalleBD = fauxSalleBD;
         this.fauxRecruteursBD = fauxRecruteursBD;
     }
 
-    public Entretien annulerEntretien(Entretien entretien, String raison) throws ExtretienNExistePas, SalleNExistePasException, RecruteurNExistePas {
+    public Entretien annulerEntretien(final Entretien entretien, final String raison) throws ExtretienNExistePas, SalleNExistePasException, RecruteurNExistePas {
         entretien.annuler(raison);
         fauxEntretienBD.update(entretien);
 
@@ -36,4 +36,5 @@ public class AnnulerEntretien {
 
         return entretien;
     }
+
 }

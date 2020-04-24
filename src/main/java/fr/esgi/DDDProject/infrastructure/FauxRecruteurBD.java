@@ -9,11 +9,12 @@ import fr.esgi.DDDProject.model.recruteur.Recruteurs;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class FauxRecruteurBD implements Recruteurs {
 
-    List<Recruteur> recruteurs = new ArrayList<>();
+    private final List<Recruteur> recruteurs = new ArrayList<>();
 
     @Override
     public List<Recruteur> getAll() throws InvalideNomreAnneeExperienceException {
@@ -24,13 +25,14 @@ public class FauxRecruteurBD implements Recruteurs {
 
         recruteurs.add(new Recruteur("Jackob", "Loic", "loic@monadresse.com", 5, disponibilites));
         recruteurs.add(new Recruteur("Dupont", "Paulben", "paulben@esgi.com", 6, disponibilites));
-
         return recruteurs;
     }
 
     @Override
     public Recruteur getById(RecruteurId id) {
-        return recruteurs.stream().filter(recruteur -> recruteur == id).findFirst().orElse(null);
+        return recruteurs.stream().filter(recruteur -> recruteur.getRecruteurId() == id)
+                .findFirst()
+                .orElse(null);
     }
 
     @Override
@@ -54,4 +56,5 @@ public class FauxRecruteurBD implements Recruteurs {
 
         return recruteur;
     }
+
 }

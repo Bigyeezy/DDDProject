@@ -15,12 +15,17 @@ public class Recruteur extends RecruteurId {
     private Integer nombreAnneeExperience;
     private List<LocalDate> disponibilites;
 
-    public Recruteur(String nom, String prenom, String email, Integer nombreAnneeExperience, List<LocalDate> disponibilites) throws InvalideNomreAnneeExperienceException {
+    public Recruteur(
+            final String nom,
+            final String prenom,
+            final String email,
+            final Integer nombreAnneeExperience,
+            final List<LocalDate> disponibilites) throws InvalideNomreAnneeExperienceException {
         this.recruteurId = new RecruteurId();
         this.nom = nom;
         this.prenom = prenom;
         this.email = email;
-        if(nombreAnneeExperience < 0 ) {
+        if (nombreAnneeExperience < 0) {
             throw new InvalideNomreAnneeExperienceException("Votre nombre d'année d'expérience n'est pas valide");
         }
         this.nombreAnneeExperience = nombreAnneeExperience;

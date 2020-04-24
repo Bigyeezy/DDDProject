@@ -13,7 +13,7 @@ import java.util.List;
 
 public class FauxSalleBD implements Salles {
 
-    List<Salle> salles = new ArrayList<>();
+    private List<Salle> salles = new ArrayList<>();
 
     @Override
     public List<Salle> getAll() throws EtageNegatifException {

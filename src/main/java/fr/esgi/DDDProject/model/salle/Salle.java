@@ -1,12 +1,10 @@
 package fr.esgi.DDDProject.model.salle;
 
-import fr.esgi.DDDProject.infrastructure.candidat.InvalideNomreAnneeExperienceException;
 import fr.esgi.DDDProject.infrastructure.salle.EtageNegatifException;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 
 public class Salle {

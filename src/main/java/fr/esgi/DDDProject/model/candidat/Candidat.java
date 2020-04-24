@@ -14,13 +14,19 @@ public class Candidat {
     private final Integer nombreAnneeExperience;
     private final List<String> typeProfil;
 
-    public Candidat(String nom, String prenom, String email, String CV, Integer nombreAnneeExperience, List<String> typeProfil) throws InvalideNomreAnneeExperienceException {
+    public Candidat(
+            final String nom,
+            final String prenom,
+            final String email,
+            final String CV,
+            final Integer nombreAnneeExperience,
+            final List<String> typeProfil) throws InvalideNomreAnneeExperienceException {
         this.nom = nom;
         this.prenom = prenom;
         this.email = email;
         this.CV = CV;
 
-        if(nombreAnneeExperience < 0 ) {
+        if (nombreAnneeExperience < 0) {
             throw new InvalideNomreAnneeExperienceException("Votre nombre d'année d'expérience n'est pas valide");
         }
         this.nombreAnneeExperience = nombreAnneeExperience;
