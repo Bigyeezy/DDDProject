@@ -10,4 +10,4 @@ Notre groupe est composé des personnes suivantes :
 - Bigyeezy : Guillaume TAKO
 - jdeyehe01 : Jean DEYEHE
 - Dopidot : Mickael MOREIRA
-- ChristopherLukombo : Christopher LUKOMBO
+- ChristopherLukombo : Christopher LUKOMq
