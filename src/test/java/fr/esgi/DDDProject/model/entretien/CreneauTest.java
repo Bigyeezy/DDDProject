@@ -15,7 +15,7 @@ public class CreneauTest {
     @Test
     public void shouldCreateCreneauWhenIsOk() throws ExceptionManager {
         // Given
-        Creneau creneau = new Creneau(LocalDateTime.of(2020, 4, 23, 15, 56), 1);
+        Creneau creneau = new Creneau(LocalDateTime.of(2020, 4, 23, 18, 56), 1);
 
         // Then
         assertThat(creneau.getHeureFin()).isAfter(creneau.getHeureDebut());
