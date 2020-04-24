@@ -1,20 +1,49 @@
 package fr.esgi.DDDProject.model.salle;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public class Salle {
 
-    private final String nom;
-    private final Integer etage;
-    private final Integer capacite;
-    private final Map<LocalDateTime, Boolean> disponibilites;
+    private final SalleId salleId;
+    private String nom;
+    private Integer etage;
+    private Integer capacite;
+    private List<LocalDate> disponibilites;
 
-    public Salle(String nom, Integer etage, Integer capacite, Map<LocalDateTime, Boolean> disponibilites) {
+    public Salle(String nom, Integer etage, Integer capacite, List<LocalDate> disponibilites) {
+        this.salleId = new SalleId();
         this.nom = nom;
         this.etage = etage;
         this.capacite = capacite;
         this.disponibilites = disponibilites;
+    }
+
+    public boolean reserver(LocalDateTime date) {
+        int index = this.disponibilites.indexOf(date);
+
+        if (index == -1)
+        {
+            return false;
+        }
+
+        this.disponibilites.remove(index);
+        return true;
+    }
+
+    public boolean liberer(LocalDate date) {
+        int index = this.disponibilites.indexOf(date);
+
+        if (index == -1)
+        {
+            this.disponibilites.add(date);
+            return true;
+        }
+
+        return false;
     }
 
     public String getNom() {
@@ -29,8 +58,12 @@ public class Salle {
         return capacite;
     }
 
-    public Map<LocalDateTime, Boolean> getDisponibilites() {
+    public List<LocalDate> getDisponibilites() {
         return disponibilites;
+    }
+
+    public SalleId getSalleId() {
+        return salleId;
     }
 
     @Override
@@ -39,19 +72,11 @@ public class Salle {
         if (o == null || getClass() != o.getClass()) return false;
 
         Salle salle = (Salle) o;
-
-        if (nom != null ? !nom.equals(salle.nom) : salle.nom != null) return false;
-        if (etage != null ? !etage.equals(salle.etage) : salle.etage != null) return false;
-        if (capacite != null ? !capacite.equals(salle.capacite) : salle.capacite != null) return false;
-        return disponibilites != null ? disponibilites.equals(salle.disponibilites) : salle.disponibilites == null;
+        return salleId != null ? !salleId.equals(salle.salleId) : salle.salleId != null;
     }
 
     @Override
     public int hashCode() {
-        int result = nom != null ? nom.hashCode() : 0;
-        result = 31 * result + (etage != null ? etage.hashCode() : 0);
-        result = 31 * result + (capacite != null ? capacite.hashCode() : 0);
-        result = 31 * result + (disponibilites != null ? disponibilites.hashCode() : 0);
-        return result;
+        return Objects.hash(salleId);
     }
 }

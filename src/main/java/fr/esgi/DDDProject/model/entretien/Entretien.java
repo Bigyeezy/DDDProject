@@ -1,10 +1,14 @@
 package fr.esgi.DDDProject.model.entretien;
 
 import fr.esgi.DDDProject.infrastructure.ExceptionManager;
+import fr.esgi.DDDProject.infrastructure.FauxSalleBD;
 import fr.esgi.DDDProject.model.candidat.Candidat;
 import fr.esgi.DDDProject.model.recruteur.Recruteur;
+import fr.esgi.DDDProject.model.salle.Salle;
 import fr.esgi.DDDProject.model.salle.SalleId;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class Entretien {
@@ -27,9 +31,21 @@ public class Entretien {
 
         this.recruteur = recruteur;
         this.candidat = candidat;
+
+        if(!estPossible(creneau.getDate(), salleId)) {
+            throw new ExceptionManager("");
+        }
     }
 
-    public void  confirmer(){
+    public boolean estPossible(LocalDate date, SalleId salleId) {
+        FauxSalleBD fauxSalleBD = new FauxSalleBD();
+        Salle salle = fauxSalleBD.getById(salleId);
+
+        return recruteur.getDisponibilites().contains(date)
+                && salle.getDisponibilites().contains(date);
+    }
+
+    public void confirmer(){
         this.statut = StatutEntretienEnum.VALIDER;
     }
 

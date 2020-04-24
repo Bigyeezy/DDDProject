@@ -10,7 +10,7 @@ import java.util.*;
 public class Creneau {
     private final LocalDate date;
     private final LocalDateTime heureDebut;
-    private LocalDateTime heureFin;
+    private final LocalDateTime heureFin;
     private final Integer duree;
     private final List<String> DAYS_AUTORIZED = Arrays.asList("SATURDAY", "FRIDAY");
 

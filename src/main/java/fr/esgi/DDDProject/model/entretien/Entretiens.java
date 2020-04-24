@@ -4,9 +4,9 @@ import fr.esgi.DDDProject.infrastructure.ExceptionManager;
 
 import java.util.List;
 
-public interface IEntretiens {
+public interface Entretiens {
 
-    List<Entretien> getAll();
+    List<Entretien> getAll() throws ExceptionManager;
     Entretien save(Entretien entretien) throws ExceptionManager;
     Entretien update(Entretien entretien) throws ExceptionManager;
 }
