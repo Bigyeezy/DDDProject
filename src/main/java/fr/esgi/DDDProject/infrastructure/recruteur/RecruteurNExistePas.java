@@ -1,7 +1,10 @@
 package fr.esgi.DDDProject.infrastructure.recruteur;
 
 public class RecruteurNExistePas extends Exception {
-    public RecruteurNExistePas(String errorMessage) {
+	
+	private static final long serialVersionUID = 1L;
+	
+    public RecruteurNExistePas(final String errorMessage) {
         super(errorMessage);
     }
 

@@ -1,7 +1,10 @@
 package fr.esgi.DDDProject.infrastructure.candidat;
 
 public class InvalideNomreAnneeExperienceException extends Exception {
-    public InvalideNomreAnneeExperienceException(String errorMessage) {
+	
+	private static final long serialVersionUID = 1L;
+	
+    public InvalideNomreAnneeExperienceException(final String errorMessage) {
         super(errorMessage);
     }
 }

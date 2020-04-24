@@ -1,7 +1,10 @@
 package fr.esgi.DDDProject.infrastructure.entretien;
 
 public class ExperienceCandidatSuperieurRecruteurException extends Exception {
-    public ExperienceCandidatSuperieurRecruteurException(String errorMessage) {
+	
+	private static final long serialVersionUID = 1L;
+	
+    public ExperienceCandidatSuperieurRecruteurException(final String errorMessage) {
         super(errorMessage);
     }
 }

@@ -1,7 +1,10 @@
 package fr.esgi.DDDProject.infrastructure.salle;
 
 public class SalleNExistePasException extends Exception {
-    public SalleNExistePasException(String errorMessage) {
+	
+	private static final long serialVersionUID = 1L;
+	
+    public SalleNExistePasException(final String errorMessage) {
         super(errorMessage);
     }
 }

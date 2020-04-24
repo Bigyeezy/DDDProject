@@ -12,13 +12,22 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * The Class FauxRecruteurBD.
+ */
 public class FauxRecruteurBD implements Recruteurs {
 
     private final List<Recruteur> recruteurs = new ArrayList<>();
 
+    /**
+     * Gets the all.
+     *
+     * @return the all
+     * @throws InvalideNomreAnneeExperienceException the invalide nomre annee experience exception
+     */
     @Override
     public List<Recruteur> getAll() throws InvalideNomreAnneeExperienceException {
-        List<LocalDate> disponibilites = new ArrayList<>();
+        final List<LocalDate> disponibilites = new ArrayList<>();
         disponibilites.add(LocalDate.of(2020, 4, 23));
         disponibilites.add(LocalDate.of(2020, 4, 24));
         disponibilites.add(LocalDate.of(2020, 4, 25));
@@ -28,15 +37,28 @@ public class FauxRecruteurBD implements Recruteurs {
         return recruteurs;
     }
 
+    /**
+     * Gets the by id.
+     *
+     * @param id the id
+     * @return the by id
+     */
     @Override
-    public Recruteur getById(RecruteurId id) {
+    public Recruteur getById(final RecruteurId id) {
         return recruteurs.stream().filter(recruteur -> recruteur.getRecruteurId() == id)
                 .findFirst()
                 .orElse(null);
     }
 
+    /**
+     * Save.
+     *
+     * @param recruteur the recruteur
+     * @return the recruteur
+     * @throws RecretueurExisteDejaException the recretueur existe deja exception
+     */
     @Override
-    public Recruteur save(Recruteur recruteur) throws RecretueurExisteDejaException {
+    public Recruteur save(final Recruteur recruteur) throws RecretueurExisteDejaException {
         if (recruteurs.contains(recruteur)) {
             throw new RecretueurExisteDejaException("Un recruteur existe déjà.");
         }
@@ -45,8 +67,15 @@ public class FauxRecruteurBD implements Recruteurs {
         return recruteur;
     }
 
+    /**
+     * Update.
+     *
+     * @param recruteur the recruteur
+     * @return the recruteur
+     * @throws RecruteurNExistePas the recruteur N existe pas
+     */
     @Override
-    public Recruteur update(Recruteur recruteur) throws RecruteurNExistePas {
+    public Recruteur update(final Recruteur recruteur) throws RecruteurNExistePas {
         final int index = recruteurs.indexOf(recruteur);
 
         if (index == -1) {

@@ -5,17 +5,28 @@ import fr.esgi.DDDProject.model.entretien.Entretien;
 import fr.esgi.DDDProject.model.entretien.Entretiens;
 import fr.esgi.DDDProject.model.salle.Salles;
 
+/**
+ * The Class ConfirmerEntretien.
+ */
 public class ConfirmerEntretien {
 
-    Entretiens fauxEntretienBD;
-    Salles fauxSalleBD;
+    private final Entretiens fauxEntretienBD;
 
-    public ConfirmerEntretien(Entretiens fauxEntretienBD, Salles fauxSalleBD) {
+    private final Salles fauxSalleBD;
+
+    public ConfirmerEntretien(final Entretiens fauxEntretienBD, final Salles fauxSalleBD) {
         this.fauxEntretienBD = fauxEntretienBD;
         this.fauxSalleBD = fauxSalleBD;
     }
 
-    public Entretien confirmerEntretien(Entretien entretien) throws ExtretienNExistePas {
+    /**
+     * Confirmer entretien.
+     *
+     * @param entretien the entretien
+     * @return the entretien
+     * @throws ExtretienNExistePas the extretien N existe pas
+     */
+    public Entretien confirmerEntretien(final Entretien entretien) throws ExtretienNExistePas {
         entretien.confirmer();
         fauxEntretienBD.update(entretien);
 

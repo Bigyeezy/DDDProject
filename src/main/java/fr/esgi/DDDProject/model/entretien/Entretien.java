@@ -3,13 +3,18 @@ package fr.esgi.DDDProject.model.entretien;
 import fr.esgi.DDDProject.infrastructure.FauxSalleBD;
 import fr.esgi.DDDProject.infrastructure.entretien.CreneauException;
 import fr.esgi.DDDProject.infrastructure.entretien.ExperienceCandidatSuperieurRecruteurException;
+import fr.esgi.DDDProject.infrastructure.salle.CapaciteNegatifException;
+import fr.esgi.DDDProject.infrastructure.salle.EtageNegatifException;
 import fr.esgi.DDDProject.model.candidat.Candidat;
 import fr.esgi.DDDProject.model.recruteur.Recruteur;
 import fr.esgi.DDDProject.model.salle.Salle;
 import fr.esgi.DDDProject.model.salle.SalleId;
 
 import java.time.LocalDate;
+import java.util.Collections;
+import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 public class Entretien {
     private EntretienId entretienId;
@@ -19,7 +24,7 @@ public class Entretien {
     private Recruteur recruteur;
     private Candidat candidat;
 
-    public Entretien(Creneau creneau, Recruteur recruteur, Candidat candidat, SalleId salleId) throws ExperienceCandidatSuperieurRecruteurException, CreneauException {
+    public Entretien(Creneau creneau, Recruteur recruteur, Candidat candidat, SalleId salleId) throws ExperienceCandidatSuperieurRecruteurException, CreneauException, EtageNegatifException, CapaciteNegatifException {
         this.entretienId = new EntretienId();
         this.salleId = salleId;
         this.statut = StatutEntretienEnum.EN_ATTENTE;
@@ -32,17 +37,30 @@ public class Entretien {
         this.recruteur = recruteur;
         this.candidat = candidat;
 
-        if(!estPossible(creneau.getDate(), salleId)) {
+        if(!estPossible(creneau.getHeureDebut().toLocalDate(), salleId)) {
             throw new CreneauException("La salle ou le recruteur n'est pas disponnible");
         }
     }
 
-    public boolean estPossible(LocalDate date, SalleId salleId) {
-        FauxSalleBD fauxSalleBD = new FauxSalleBD();
-        Salle salle = fauxSalleBD.getById(salleId);
+    private boolean estPossible(final LocalDate date, final SalleId salleId) throws EtageNegatifException, CapaciteNegatifException {
+        final FauxSalleBD fauxSalleBD = new FauxSalleBD();
+        final Salle salle = fauxSalleBD.getById(salleId);
 
-        return recruteur.getDisponibilites().contains(date)
+        return !chercherDisponibilitesRecruteur(recruteur).isEmpty() && !chercherDisponibilitesSale(salle).isEmpty() &&
+                recruteur.getDisponibilites().contains(date)
                 && salle.getDisponibilites().contains(date);
+    }
+
+    private List<LocalDate> chercherDisponibilitesSale(final Salle salle) {
+        return Optional.ofNullable(salle)
+                .map(Salle::getDisponibilites)
+                .orElse(Collections.emptyList());
+    }
+
+    private List<LocalDate> chercherDisponibilitesRecruteur(final Recruteur recruteur) {
+        return Optional.ofNullable(recruteur)
+                .map(Recruteur::getDisponibilites)
+                .orElse(Collections.emptyList());
     }
 
     public void confirmer(){

@@ -13,7 +13,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class FauxEntretienBDTest {
+public class FauxRecruteurDBTest {
 
     private FauxRecruteurBD fauxRecruteurBD = new FauxRecruteurBD();
 
@@ -66,7 +66,7 @@ public class FauxEntretienBDTest {
 
 
     @Test
-    public void shouldUpdateRecruteurWhenIsOk() throws RecruteurNExistePas , InvalideNomreAnneeExperienceException {
+    public void shouldUpdateRecruteurWhenIsOk() throws RecruteurNExistePas, InvalideNomreAnneeExperienceException {
         // Given
         final Recruteur recruteur = fauxRecruteurBD.getAll().get(0);
 
@@ -85,8 +85,8 @@ public class FauxEntretienBDTest {
 
 
         // Then
-        assertThatThrownBy(() ->  fauxRecruteurBD.update(recruteur))
+        assertThatThrownBy(() -> fauxRecruteurBD.update(recruteur))
                 .isInstanceOf(RecruteurNExistePas.class);
     }
-    
+
 }

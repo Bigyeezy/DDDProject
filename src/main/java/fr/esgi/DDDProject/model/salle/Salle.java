@@ -1,5 +1,6 @@
 package fr.esgi.DDDProject.model.salle;
 
+import fr.esgi.DDDProject.infrastructure.salle.CapaciteNegatifException;
 import fr.esgi.DDDProject.infrastructure.salle.EtageNegatifException;
 
 import java.time.LocalDate;
@@ -15,19 +16,19 @@ public class Salle {
     private Integer capacite;
     private List<LocalDate> disponibilites;
 
-    public Salle(String nom, Integer etage, Integer capacite, List<LocalDate> disponibilites) throws EtageNegatifException {
+    public Salle(String nom, Integer etage, Integer capacite, List<LocalDate> disponibilites) throws EtageNegatifException, CapaciteNegatifException {
         this.salleId = new SalleId();
         this.nom = nom;
 
-        if(etage < 0 ) {
+        if (etage < 0) {
             throw new EtageNegatifException("Le numéro de l'étage n'est pas valide");
         }
 
         this.etage = etage;
 
 
-        if(capacite < 0 ) {
-            throw new EtageNegatifException("La capacité de la salle n'est pas valide");
+        if (capacite < 0) {
+            throw new CapaciteNegatifException("La capacité de la salle n'est pas valide");
         }
 
         this.capacite = capacite;
@@ -35,8 +36,8 @@ public class Salle {
 
     }
 
-    public boolean reserver(LocalDateTime date) {
-        int index = this.disponibilites.indexOf(date);
+    public boolean reserver(final LocalDateTime date) {
+        int index = this.disponibilites.indexOf(date.toLocalDate());
 
         if (index == -1)
         {
@@ -47,7 +48,7 @@ public class Salle {
         return true;
     }
 
-    public boolean liberer(LocalDate date) {
+    public boolean liberer(final LocalDate date) {
         int index = this.disponibilites.indexOf(date);
 
         if (index == -1)
