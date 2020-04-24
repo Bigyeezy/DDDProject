@@ -19,7 +19,7 @@ public class Creneau {
             throw new ExceptionManager("La date et la durée sont obligatoires");
         }
         if (duree <= 0) {
-            throw new ExceptionManager("La durée ne peut pas être négatif");
+            throw new ExceptionManager("La durée ne peut pas être négative");
         }
         if (duree > 3) {
             throw new ExceptionManager("La durée ne peut pas être supérieur 3 heures.");
