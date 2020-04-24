@@ -1,6 +1,6 @@
 package fr.esgi.DDDProject.model.entretien;
 
-public enum StatutEnum {
+public enum StatutEntretienEnum {
 
     VALIDER,
     ANNULER,

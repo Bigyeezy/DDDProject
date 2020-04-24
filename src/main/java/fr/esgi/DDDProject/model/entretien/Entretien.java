@@ -9,26 +9,26 @@ import java.util.Objects;
 public class Entretien {
     private EntretienId entretienId;
     private SalleId salleId;
-    private StatutEnum statut;
+    private StatutEntretienEnum statut;
     private Creneau creneau;
     private Recruteur recruteur;
     private Candidat candidat;
 
-    public Entretien(Creneau creneau, Recruteur recruteur, Candidat candidat) {
+    public Entretien(Creneau creneau, Recruteur recruteur, Candidat candidat, SalleId salleId) {
         this.entretienId = new EntretienId();
-        this.salleId = new SalleId();
-        this.statut = StatutEnum.EN_ATTENTE;
+        this.salleId = salleId;
+        this.statut = StatutEntretienEnum.EN_ATTENTE;
         this.creneau = creneau;
         this.recruteur = recruteur;
         this.candidat = candidat;
     }
 
     public void  confirmer(){
-        this.statut = StatutEnum.VALIDER;
+        this.statut = StatutEntretienEnum.VALIDER;
     }
 
     public void annuler(String raison){
-        this.statut = StatutEnum.ANNULER;
+        this.statut = StatutEntretienEnum.ANNULER;
     }
 
     public EntretienId getEntretienId() {
@@ -39,7 +39,7 @@ public class Entretien {
         return salleId;
     }
 
-    public StatutEnum getStatut() {
+    public StatutEntretienEnum getStatut() {
         return statut;
     }
 
