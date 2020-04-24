@@ -15,10 +15,10 @@ public class CreneauTest {
     @Test
     public void shouldCreateCreneauWhenIsOk() throws ExceptionManager {
         // Given
-        Creneau creneau = new Creneau(LocalDateTime.now(), 1);
+        Creneau creneau = new Creneau(LocalDateTime.of(2020, 4, 23, 15, 56), 1);
 
         // Then
-       assertThat(creneau.getHeureFin()).isAfter(creneau.getHeureDebut());
+        assertThat(creneau.getHeureFin()).isAfter(creneau.getHeureDebut());
     }
 
     @Test
@@ -29,13 +29,19 @@ public class CreneauTest {
 
     @Test
     public void shouldThrowExceptionWhenDureeIsMoreThan3Hours() {
-        assertThatThrownBy(() -> new Creneau(LocalDateTime.now(), 5))
+        assertThatThrownBy(() -> new Creneau(LocalDateTime.of(2020, 4, 23, 15, 56), 5))
                 .isInstanceOf(ExceptionManager.class);
     }
 
     @Test
     public void shouldThrowExceptionWhenDureeIsLessThan1Hour() {
-        assertThatThrownBy(() -> new Creneau(LocalDateTime.now(), 0))
+        assertThatThrownBy(() -> new Creneau(LocalDateTime.of(2020, 4, 23, 15, 56), 0))
+                .isInstanceOf(ExceptionManager.class);
+    }
+
+    @Test
+    public void shouldThrowExceptionWhenHeureDebutIsInTheWeekEnd() {
+        assertThatThrownBy(() -> new Creneau(LocalDateTime.of(2020, 4, 25, 15, 56), 2))
                 .isInstanceOf(ExceptionManager.class);
     }
 

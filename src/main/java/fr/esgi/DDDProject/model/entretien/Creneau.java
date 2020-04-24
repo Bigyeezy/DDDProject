@@ -12,7 +12,7 @@ public class Creneau {
     private final LocalDateTime heureDebut;
     private LocalDateTime heureFin;
     private final Integer duree;
-    private final List<String> DAYS_AUTORIZED = Arrays.asList("Saturday", "Friday");
+    private final List<String> DAYS_AUTORIZED = Arrays.asList("SATURDAY", "FRIDAY");
 
     public Creneau(final LocalDateTime heureDebut, final Integer duree) throws ExceptionManager {
         if (heureDebut == null || duree == null) {
@@ -24,7 +24,7 @@ public class Creneau {
         if (duree > 3) {
             throw new ExceptionManager("La durée ne peut pas être supérieur 3 heures.");
         }
-        final String name = LocalDate.now().getDayOfWeek().name();
+        final String name = heureDebut.getDayOfWeek().name().toUpperCase();
         if (DAYS_AUTORIZED.contains(name)) {
             throw new ExceptionManager("La date doit être dans la semaine");
         }
